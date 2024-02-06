@@ -13,5 +13,13 @@ namespace Health_Management_System.Controllers
         {
             return View();
         }
+        public ActionResult login()
+        {
+            return View();
+        }
+        public ActionResult registration()
+        {
+            return View();
+        }
     }
 }

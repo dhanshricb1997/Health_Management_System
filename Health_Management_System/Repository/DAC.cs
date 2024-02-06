@@ -7,5 +7,9 @@ namespace Health_Management_System.Repository
 {
     public class DAC
     {
+        public void addUser()
+        {
+
+        }
     }
 }
