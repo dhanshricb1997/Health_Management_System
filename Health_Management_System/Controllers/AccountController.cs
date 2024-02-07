@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Health_Management_System.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,9 +14,19 @@ namespace Health_Management_System.Controllers
         {
             return View();
         }
+       
         public ActionResult Login()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Login(loginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+               
+            }
+            return View(model);
         }
         public ActionResult registartionForm()
         {
