@@ -9,7 +9,6 @@ namespace Health_Management_System.Models
     public class loginModel
     {
         [Key]
-
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Username is required")]

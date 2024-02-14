@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Health_Management_System.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,19 @@ namespace Health_Management_System.Controllers
         }
         public ActionResult Dashboard()
         {
-            return View();
+            loginModel model = new loginModel();
+            
+            if (ControllerContext.HttpContext.Session["Username"] == null && ControllerContext.HttpContext.Session["Password"] == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+            else
+               return View();
+        }
+
+        public ActionResult Profile()
+        {
+            return View("~/Views/Shared/_userProfile.cshtml");
         }
     }
 }
