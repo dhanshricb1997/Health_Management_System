@@ -1,0 +1,130 @@
+﻿@model Health_Management_System.Models.Registation
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!DOCTYPE html>
+<style>
+    .content-placeholder::placeholder {
+        text-align: center;
+    }
+    /*.container-fluid{
+        width : 380px;
+        border : 2px solid;
+    }*/
+    h3{
+        padding-left :15px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+            $('#firstName').on('input', function () {
+                var searchText = $(this).val();
+
+                $.ajax({
+                    url: '../Account/registartionForm',
+                    type: 'GET',
+                    data: { searchText: searchText },
+                    success: function (response) {
+                        $('#role').empty(); // Clear existing options
+                        $.each(response, function (index, option) {
+                            $('#role').append($('<option>').text(data.Text).val(data.Value));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+        
+</script>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>registartionForm</title>
+
+</head>
+<body>
+    
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+
+<div class="container-fluid" style="width: 300px; border:2px solid ">
+
+    <div>
+        <h3>Registration Form:</h3>
+    </div>
+
+    <div style="padding: 10px">
+        <div>
+            @Html.LabelFor(model => model.firstName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.firstName, new { @class = "content-placeholder", style = "width:250px;height:25px", placeholder = "Please Enter First Name", @id = "firstName" })
+            @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div style="padding: 10px">
+        <div>
+            @Html.LabelFor(model => model.middleName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.middleName, new { @class = "content-placeholder", style = "width : 250px; height : 25px", placeholder = "Please Enter Middle Name" })
+            @Html.ValidationMessageFor(model => model.middleName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div style="padding: 10px">
+        <div>
+            @Html.LabelFor(model => model.lastName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.lastName, new { @class = "content-placeholder", placeholder = "Please Enter last Name", style = "width : 250px ; height : 25px" })
+            @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div style="padding: 10px">
+        <div>
+            @Html.LabelFor(model => model.mobNo, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.mobNo, new { @class = "content-placeholder", placeholder = "Please Enter Mobile Number", style = "width : 250px ; height : 25px", @maxlength = "10" })
+            @Html.ValidationMessageFor(model => model.mobNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div style="padding: 10px">
+        <div>
+            @Html.LabelFor(model => model.designation, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.designation, new { @class = "content-placeholder", placeholder = "Please Enter last Name", style = "width : 250px ; height : 25px" })
+            @Html.ValidationMessageFor(model => model.designation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div style="padding: 10px">
+        <div>
+            @Html.LabelFor(model => model.role, new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.role, new List<SelectListItem> { new SelectListItem { Text = "--Select--", Value = ""} },new { @class = "content-placeholder" , style = "width: 250px; height: 25px", @id = "role"})
+
+            @*@Html.DropDownListFor(model => model.role, Model.role, "--Select--")*@
+            @*@Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div style="padding: 10px">
+        <div>
+            @Html.LabelFor(model => model.address, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.address, new { @class = "content-placeholder", placeholder = "Please Enter Address", style = "width : 250px ; height : 25px" })
+            @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+
+</div>
+    }
+</body>
+</html>

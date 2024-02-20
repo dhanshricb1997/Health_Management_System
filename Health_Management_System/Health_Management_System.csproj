@@ -126,7 +126,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
+    <Compile Include="Models\Registation.cs" />
+
     <Compile Include="Models\loginModel.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DAC.cs" />
   </ItemGroup>
@@ -167,9 +171,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+
+    <Content Include="Views\Account\registartionForm.cshtml" />
+
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
     <Content Include="Views\Shared\_userProfile.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
