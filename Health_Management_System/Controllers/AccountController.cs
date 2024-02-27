@@ -36,48 +36,62 @@ namespace Health_Management_System.Controllers
         [HttpPost]
         public ActionResult Login(loginModel model)
         {
-            
-            
-           
+
             if (ModelState.IsValid)
             {
-
+                string pass = "";
                 loginModel loginData = _dac.userlogin(model);
-                ControllerContext.HttpContext.Session["Username"] = loginData.Username;
-                ControllerContext.HttpContext.Session["Password"] = loginData.Password;
-                if (loginData.Username == model.Username && loginData.Password == model.Password)
+                string abc = loginData.Id.ToString();
+                if (!string.IsNullOrEmpty(loginData.Password))
                 {
-                    return RedirectToAction("Dashboard", "Dashboard", new { area = "" });
+                    pass = loginData.Password.ToString();
                 }
-                
+
+                if (!string.IsNullOrEmpty(abc) && !string.IsNullOrEmpty(pass))
+                {
+                    ControllerContext.HttpContext.Session["Username"] = loginData.Username;
+                    ControllerContext.HttpContext.Session["Password"] = loginData.Password;
+                    ControllerContext.HttpContext.Session["id"] = loginData.Id;
+                    ControllerContext.HttpContext.Session["role"] = loginData.Role;
+
+
+                    if (loginData.Username == model.Username && loginData.Password == model.Password)
+                    {
+                        return RedirectToAction("Dashboard", "Dashboard", new { area = " " });
+                    }
+                }
+                else
+                {
+                    ViewBag.AlertMessage = "Invalid Login Credentials.";
+                }
+
+
             }
-                            
             return View("Login", model);
-            
         }
 
         public ActionResult registartionForm()
         {
            
             
-                Registation obj1 = new Registation();
-                //DAC abc = new DAC();
-                DataTable dt = new DataTable();
+               // Registation obj1 = new Registation();
+               // //DAC abc = new DAC();
+               // DataTable dt = new DataTable();
 
-                dt = _dac.dropDown();
-                List<SelectListItem> roleoptions = dt.AsEnumerable().Select(row => new SelectListItem
-                {
-                    Value = row["DocId"].ToString(),
-                    Text = row["Role"].ToString()
-                }).ToList();
+               // dt = _dac.dropDown();
+               // List<SelectListItem> roleoptions = dt.AsEnumerable().Select(row => new SelectListItem
+               // {
+               //     Value = row["DocId"].ToString(),
+               //     Text = row["Role"].ToString()
+               // }).ToList();
 
-                var model = new Registation
-                {
-                   roleList = roleoptions
-                };
-                //return View(model.role);
+               // //var model = new Registation
+               // //{
+               // //   roleList = roleoptions
+               // //};
+               return View("registartionForm");
             
-            return Json(model.role, JsonRequestBehavior.AllowGet);
+            //return Json(roleoptions, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -99,6 +113,22 @@ namespace Health_Management_System.Controllers
                 return View();
             }
             
+        }
+
+        [HttpPost]
+        public JsonResult UpdatePassword(ForgotPasswordModel model)
+        {
+            try
+            {
+                var updatemodel = _dac.UpdatePassword(model);
+
+                return Json(new { success = true, Message = "password updated successfully", updatemodel });
+            }
+            catch (Exception ex)
+            {
+                // Log or print the exception details
+                return Json((success: false, error: ex.Message));
+            }
         }
     }
 }

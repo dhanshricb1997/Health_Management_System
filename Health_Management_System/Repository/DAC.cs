@@ -129,6 +129,28 @@ namespace Health_Management_System.Repository
             }
         }
 
+        public ForgotPasswordModel UpdatePassword(ForgotPasswordModel m)
+        {
+            ForgotPasswordModel model = new ForgotPasswordModel();
+
+            using (SqlConnection sqlConn = new SqlConnection(connectionString))
+            {
+                sqlConn.Open();
+
+                string q = "Update tbl_user_login set password = @NewPassword where ID = @Id";
+                using (SqlCommand cmd = new SqlCommand(q, sqlConn))
+                {
+                    cmd.Parameters.AddWithValue("@NewPassword", m.NewPassword);
+                    cmd.Parameters.AddWithValue("@Id", m.Id);
+                    cmd.ExecuteNonQuery();
+
+                    return model;
+                }
+            }
+
+
+        }
+
     }
 
                        

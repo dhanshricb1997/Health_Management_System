@@ -19,4 +19,17 @@ namespace Health_Management_System.Models
         [Required(ErrorMessage = "Role is required")]
         public string Role { get; set; }
     }
+
+    public class ForgotPasswordModel
+    {
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Password is required")]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+        [Required(ErrorMessage = "Confirm Password is required")]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "Password and Confirm Password must match")]
+        public string ConfirmPassword { get; set; }
+    }
 }
