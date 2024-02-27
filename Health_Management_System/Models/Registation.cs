@@ -30,7 +30,7 @@ namespace Health_Management_System.Models
 
         [Display(Name = "Mobile Number")]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Please enter a 10-digit mobile number.")]
-        public string mobNo { get; set; }
+        public string mobNumber { get; set; }
 
         [Display(Name = "Address")]
         [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Address Contains Only Characters Letter")]
@@ -38,8 +38,8 @@ namespace Health_Management_System.Models
 
         [Display(Name = "Role")]
 
-        //public string role { get; set; }
-        public List<SelectListItem> role { get; set; }
+        public string role { get; set; }
+        public List<SelectListItem> roleList { get; set; }
 
     }
 }

@@ -61,10 +61,10 @@ namespace Health_Management_System.Controllers
            
             
                 Registation obj1 = new Registation();
-                DAC abc = new DAC();
+                //DAC abc = new DAC();
                 DataTable dt = new DataTable();
 
-                dt = abc.dropDown();
+                dt = _dac.dropDown();
                 List<SelectListItem> roleoptions = dt.AsEnumerable().Select(row => new SelectListItem
                 {
                     Value = row["DocId"].ToString(),
@@ -73,7 +73,7 @@ namespace Health_Management_System.Controllers
 
                 var model = new Registation
                 {
-                   role = roleoptions
+                   roleList = roleoptions
                 };
                 //return View(model.role);
             
